@@ -229,9 +229,9 @@ pub mod util;
 mod vanishing_poly;
 pub mod verifier;
 
-#[cfg(test)]
+// #[cfg(test)]
 pub mod fibonacci_stark;
-#[cfg(test)]
+// #[cfg(test)]
 pub mod permutation_stark;
-#[cfg(test)]
+// #[cfg(test)]
 pub mod unconstrained_stark;
