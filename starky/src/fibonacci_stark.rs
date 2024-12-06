@@ -23,28 +23,35 @@ use crate::util::trace_rows_to_poly_values;
 /// `x0' <- x1, x1' <- x0 + x1.
 #[derive(Debug, Copy, Clone)]
 pub struct FibonacciStark<F: RichField + Extendable<D>, const D: usize> {
-    num_rows: usize,
-    _phantom: PhantomData<F>,
+    /// ! Add docs
+    pub num_rows: usize,
+    /// ! Add docs
+    pub _phantom: PhantomData<F>,
 }
 
 impl<F: RichField + Extendable<D>, const D: usize> FibonacciStark<F, D> {
+    /// ! Add docs
     // The first public input is `x0`.
-    const PI_INDEX_X0: usize = 0;
+    pub const PI_INDEX_X0: usize = 0;
+    /// ! Add docs
     // The second public input is `x1`.
-    const PI_INDEX_X1: usize = 1;
+    pub const PI_INDEX_X1: usize = 1;
+    /// ! Add docs
     // The third public input is the second element of the last row, which should be equal to the
     // `num_rows`-th Fibonacci number.
-    const PI_INDEX_RES: usize = 2;
+    pub const PI_INDEX_RES: usize = 2;
 
-    const fn new(num_rows: usize) -> Self {
+    /// ! Add docs
+    pub const fn new(num_rows: usize) -> Self {
         Self {
             num_rows,
             _phantom: PhantomData,
         }
     }
+    /// ! Add docs
 
     /// Generate the trace using `x0, x1` as initial state values.
-    fn generate_trace(&self, x0: F, x1: F) -> Vec<PolynomialValues<F>> {
+    pub fn generate_trace(&self, x0: F, x1: F) -> Vec<PolynomialValues<F>> {
         let trace_rows = (0..self.num_rows)
             .scan([x0, x1], |acc, _| {
                 let tmp = *acc;
