@@ -6,7 +6,6 @@ use num::bigint::BigUint;
 use serde::{Deserialize, Serialize};
 
 use crate::extension::{Extendable, FieldExtension, Frobenius, OEF};
-use crate::ops::Square;
 use crate::types::{Field, Sample};
 
 #[derive(Copy, Clone, Eq, PartialEq, Hash, Serialize, Deserialize)]
