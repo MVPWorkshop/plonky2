@@ -21,8 +21,8 @@ use crate::util::trace_rows_to_poly_values;
 /// Toy STARK system used for testing.
 /// Computes a Fibonacci sequence with state `[x0, x1]` using the state transition
 /// `x0' <- x1, x1' <- x0 + x1.
-#[derive(Copy, Clone)]
-struct FibonacciStark<F: RichField + Extendable<D>, const D: usize> {
+#[derive(Debug, Copy, Clone)]
+pub struct FibonacciStark<F: RichField + Extendable<D>, const D: usize> {
     num_rows: usize,
     _phantom: PhantomData<F>,
 }
