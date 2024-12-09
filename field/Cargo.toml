@@ -2,7 +2,12 @@
 name = "plonky2_field"
 description = "Finite field arithmetic"
 version = "1.0.0"
-authors = ["Daniel Lubarov <daniel@lubarov.com>", "William Borgeaud <williamborgeaud@gmail.com>", "Jacqueline Nabaglo <j@nab.gl>", "Hamish Ivey-Law <hamish@ivey-law.name>"]
+authors = [
+    "Daniel Lubarov <daniel@lubarov.com>",
+    "William Borgeaud <williamborgeaud@gmail.com>",
+    "Jacqueline Nabaglo <j@nab.gl>",
+    "Hamish Ivey-Law <hamish@ivey-law.name>",
+]
 edition.workspace = true
 license.workspace = true
 homepage.workspace = true
@@ -14,7 +19,8 @@ categories.workspace = true
 anyhow = { workspace = true }
 itertools = { workspace = true, features = ["use_alloc"] }
 num = { workspace = true, features = ["alloc"] }
-rand = { workspace = true, features = ["getrandom"] }
+rand = { workspace = true, default-features = false }
+rand_chacha = { version = "0.3.1", default-features = false }
 serde = { workspace = true, features = ["alloc"] }
 static_assertions = { workspace = true }
 unroll = { workspace = true }

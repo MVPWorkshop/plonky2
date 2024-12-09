@@ -4,11 +4,12 @@ use core::fmt::{Debug, Display};
 use core::hash::Hash;
 use core::iter::{Product, Sum};
 use core::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
+use rand::SeedableRng;
+use rand_chacha::ChaCha20Rng;
 
 use num::bigint::BigUint;
 use num::{Integer, One, ToPrimitive, Zero};
 use plonky2_util::bits_u64;
-use rand::rngs::OsRng;
 use serde::de::DeserializeOwned;
 use serde::Serialize;
 
@@ -25,7 +26,9 @@ pub trait Sample: Sized {
     /// Samples a single value using the [`OsRng`].
     #[inline]
     fn rand() -> Self {
-        Self::sample(&mut OsRng)
+        // ! This is changed, not using OsRng, now using deterministic ChaCha RNG
+        let mut rng = ChaCha20Rng::seed_from_u64(0xDEADBEEF);
+        Self::sample(&mut rng)
     }
 
     /// Samples a [`Vec`] of values of length `n` using [`OsRng`].
