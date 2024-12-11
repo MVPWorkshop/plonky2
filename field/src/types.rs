@@ -23,21 +23,22 @@ pub trait Sample: Sized {
     where
         R: rand::RngCore + ?Sized;
 
-    /// Samples a single value using the [`OsRng`].
+    /// Samples a single value using the [`ChaCha20Rng`].
     #[inline]
     fn rand() -> Self {
-        // ! This is changed, not using OsRng, now using deterministic ChaCha RNG
+        // ! This is changed, not using OsRng, now using deterministic ChaCha20Rng
+        // ! TODO -> This should probably be hidden !!!
         let mut rng = ChaCha20Rng::seed_from_u64(0xDEADBEEF);
         Self::sample(&mut rng)
     }
 
-    /// Samples a [`Vec`] of values of length `n` using [`OsRng`].
+    /// Samples a [`Vec`] of values of length `n` using [`ChaCha20Rng`].
     #[inline]
     fn rand_vec(n: usize) -> Vec<Self> {
         (0..n).map(|_| Self::rand()).collect()
     }
 
-    /// Samples an array of values of length `N` using [`OsRng`].
+    /// Samples an array of values of length `N` using [`ChaCha20Rng`].
     #[inline]
     fn rand_array<const N: usize>() -> [Self; N] {
         Self::rand_vec(N)
