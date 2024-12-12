@@ -18,22 +18,26 @@ use crate::stark::Stark;
 use crate::util::trace_rows_to_poly_values;
 
 /// A trace with arbitrary values
-#[derive(Copy, Clone)]
-struct UnconstrainedStark<F: RichField + Extendable<D>, const D: usize> {
-    num_rows: usize,
-    _phantom: PhantomData<F>,
+#[derive(Copy, Clone, Debug)]
+pub struct UnconstrainedStark<F: RichField + Extendable<D>, const D: usize> {
+    ///
+    pub num_rows: usize,
+    ///
+    pub _phantom: PhantomData<F>,
 }
 
 impl<F: RichField + Extendable<D>, const D: usize> UnconstrainedStark<F, D> {
-    const fn new(num_rows: usize) -> Self {
+    ///
+    pub const fn new(num_rows: usize) -> Self {
         Self {
             num_rows,
             _phantom: PhantomData,
         }
     }
 
+    // ! This should not be important for us !
     /// Generate the trace using two columns of random values
-    fn generate_trace(&self) -> Vec<PolynomialValues<F>> {
+    pub fn generate_trace(&self) -> Vec<PolynomialValues<F>> {
         let trace_rows = (0..self.num_rows)
             .map(|_| [F::rand(), F::rand()])
             .collect::<Vec<_>>();

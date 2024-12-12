@@ -21,14 +21,17 @@ use crate::util::trace_rows_to_poly_values;
 /// Computes a sequence with state `[i, j]` using the state transition
 /// i' <- i+1, j' <- j+1`.
 /// Note: The `0, 1` columns are the columns used to test the permutation argument.
-#[derive(Copy, Clone)]
-struct PermutationStark<F: RichField + Extendable<D>, const D: usize> {
-    num_rows: usize,
-    _phantom: PhantomData<F>,
+#[derive(Copy, Clone, Debug)]
+pub struct PermutationStark<F: RichField + Extendable<D>, const D: usize> {
+    ///
+    pub num_rows: usize,
+    ///
+    pub _phantom: PhantomData<F>,
 }
 
 impl<F: RichField + Extendable<D>, const D: usize> PermutationStark<F, D> {
-    const fn new(num_rows: usize) -> Self {
+    ///
+    pub const fn new(num_rows: usize) -> Self {
         Self {
             num_rows,
             _phantom: PhantomData,
@@ -36,7 +39,7 @@ impl<F: RichField + Extendable<D>, const D: usize> PermutationStark<F, D> {
     }
 
     /// Generate the trace using `x0, x0+1, 1` as initial state values.
-    fn generate_trace(&self, x0: F) -> Vec<PolynomialValues<F>> {
+    pub fn generate_trace(&self, x0: F) -> Vec<PolynomialValues<F>> {
         let mut trace_rows = (0..self.num_rows)
             .scan([x0, x0 + F::ONE, F::ONE], |acc, _| {
                 let tmp = *acc;
